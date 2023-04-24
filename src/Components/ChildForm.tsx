@@ -28,7 +28,7 @@ export default function ChildForm(props: ChildProps) {
     );
   return (
     <div className="form">
-      <p>Characters in Children = {totalLength || 0}</p>
+      <p>Characters in Children = {(inputs[level + 1] && totalLength) || 0}</p>
       <input
         id="input"
         type="text"

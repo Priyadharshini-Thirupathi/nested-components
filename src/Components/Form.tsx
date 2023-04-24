@@ -4,17 +4,6 @@ import _ from "lodash";
 import ChildForm from "./ChildForm";
 import Button from "./Button";
 
-type ChildProps = {
-  level: number;
-  inputs: string[];
-  onInputChange: (
-    event: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => void;
-  onAddChildren: (obj: number) => void;
-  onDeleteChildren: (obj: number) => void;
-};
-
 export default function Form() {
   const [inputs, setInputs] = useState<string[]>([""]);
   const handleAdd = (level: number) => {
@@ -42,7 +31,7 @@ export default function Form() {
       return newArray;
     });
   };
-  const totalLength: any =
+  const totalLength =
     inputs[1] !== undefined &&
     _.reduce(
       _.slice(
