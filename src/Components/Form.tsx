@@ -53,7 +53,7 @@ export default function Form() {
         }
       />
       <div>
-        <Button label="Add Chilren" type="add" onClick={() => handleAdd(0)} />
+        <Button label="Add Children" type="add" onClick={() => handleAdd(0)} />
       </div>
       {inputs[1] !== undefined && (
         <ChildForm
