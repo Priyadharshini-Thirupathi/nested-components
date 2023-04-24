@@ -5,7 +5,7 @@ import { useState } from 'react';
 function App() {
   return (
     <div className="App">
-      <Form  updatedLength={0}/>
+      <Form />
     </div>
   );
 }
