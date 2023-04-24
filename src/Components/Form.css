@@ -1,10 +1,10 @@
-.form{
+.form {
   width: auto;
-  margin: 50px;
+  margin: 20px;
   display: inline-block;
   font-size: 20px;
   height: auto;
-  padding: 16px;
+  padding: 10px;
   background-color: rgba(236, 236, 236, 0.946);
   color: black;
   transition: 0.3s;
@@ -12,26 +12,30 @@
   border-radius: 5px;
 }
 
-#input{
+#input {
   outline: none;
 }
 
-.add--btn, .del--btn{
+.add--btn,
+.delete--btn {
   display: inline-block;
   font-size: 16px;
   border-radius: 4px;
+  width: auto;
   outline: 0;
   border: none;
   vertical-align: baseline;
-  background: #3aed12 ;
+  background: #3aed12;
   color: black;
   border-radius: 16px;
   border: none;
-  padding: 10px;
-  margin: 20px;  
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 10px;
   line-height: 1em;
 }
-.del--btn{
-  background: #ed2112 ;
+
+.delete--btn {
+  background: #ed2112;
 
 }

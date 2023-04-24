@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./Form.css";
 import _ from "lodash";
+import ChildForm from "./ChildForm";
+import Button from "./Button";
 
 type ChildProps = {
   level: number;
@@ -52,19 +54,7 @@ export default function Form() {
     );
   return (
     <div className="form">
-      <p>
-        Characters in Children ={" "}
-        {(inputs[0] &&
-          _.reduce(
-            _.slice(
-              _.map(inputs, (input) => input.length),
-              0,
-              inputs.length
-            ),
-            (sum, n) => sum + n
-          )) ||
-          0}
-      </p>
+      <p>Characters in Children = {(inputs[0] && totalLength) || 0}</p>
       <input
         id="input"
         type="text"
@@ -74,62 +64,16 @@ export default function Form() {
         }
       />
       <div>
-        <button className="add--btn" onClick={() => handleAdd(0)}>
-          Add Children
-        </button>
+        <Button label="Add Child" type="add" onClick={() => handleAdd(0)} />
       </div>
       {inputs[1] !== undefined && (
         <ChildForm
+          key={1}
           level={1}
           inputs={inputs}
           onInputChange={handleInputChange}
           onAddChildren={handleAdd}
           onDeleteChildren={handleDelete}
-        />
-      )}
-    </div>
-  );
-}
-
-function ChildForm(props: ChildProps) {
-  const { level, inputs, onAddChildren, onDeleteChildren, onInputChange } =
-    props;
-  const totalLength: any =
-    inputs[1] !== undefined &&
-    _.reduce(
-      _.slice(
-        _.map(inputs, (input) => input.length),
-        level,
-        inputs.length
-      ),
-      (sum, n) => sum + n
-    );
-  return (
-    <div className="form">
-      <p>Characters in Children = {totalLength || 0}</p>
-      <input
-        id="input"
-        type="text"
-        value={inputs[level]}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-          onInputChange(event, level)
-        }
-      />
-      <div>
-        <button className="add--btn" onClick={() => onAddChildren(level)}>
-          Add Children
-        </button>
-        <button className="del--btn" onClick={() => onDeleteChildren(level)}>
-          Delete Children
-        </button>
-      </div>
-      {inputs[level + 1] !== undefined && (
-        <ChildForm
-          level={level + 1}
-          inputs={inputs}
-          onInputChange={onInputChange}
-          onAddChildren={onAddChildren}
-          onDeleteChildren={onDeleteChildren}
         />
       )}
     </div>
