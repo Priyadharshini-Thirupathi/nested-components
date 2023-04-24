@@ -15,9 +15,7 @@ type ChildProps = {
 
 export default function Form() {
   const [inputs, setInputs] = useState<string[]>([""]);
-  const [clicked, setClicked] = useState<boolean>();
   const handleAdd = (level: number) => {
-    setClicked(true);
     setInputs((prevState) => {
       const newArray = [...prevState];
       newArray.splice(level + 1, 0, "");
@@ -42,9 +40,31 @@ export default function Form() {
       return newArray;
     });
   };
+  const totalLength: any =
+    inputs[1] !== undefined &&
+    _.reduce(
+      _.slice(
+        _.map(inputs, (input) => input.length),
+        0,
+        inputs.length
+      ),
+      (sum, n) => sum + n
+    );
   return (
     <div className="form">
-      {/* <p>Characters in Children = {text.length}</p> */}
+      <p>
+        Characters in Children ={" "}
+        {(inputs[0] &&
+          _.reduce(
+            _.slice(
+              _.map(inputs, (input) => input.length),
+              0,
+              inputs.length
+            ),
+            (sum, n) => sum + n
+          )) ||
+          0}
+      </p>
       <input
         id="input"
         type="text"
@@ -74,9 +94,19 @@ export default function Form() {
 function ChildForm(props: ChildProps) {
   const { level, inputs, onAddChildren, onDeleteChildren, onInputChange } =
     props;
+  const totalLength: any =
+    inputs[1] !== undefined &&
+    _.reduce(
+      _.slice(
+        _.map(inputs, (input) => input.length),
+        level,
+        inputs.length
+      ),
+      (sum, n) => sum + n
+    );
   return (
     <div className="form">
-      {/* <p>Characters in Children = {length}</p> */}
+      <p>Characters in Children = {totalLength || 0}</p>
       <input
         id="input"
         type="text"
