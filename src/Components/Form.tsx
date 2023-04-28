@@ -3,8 +3,10 @@ import "./Form.css";
 import _ from "lodash";
 import ChildForm from "./ChildForm";
 import Button from "./Button";
+import {getTotalLength} from './utills';
 
 export default function Form() {
+  const level = 0;
   const [inputs, setInputs] = useState<string[]>([""]);
   const handleAdd = (level: number) => {
     setInputs((prevState) => {
@@ -31,29 +33,22 @@ export default function Form() {
       return newArray;
     });
   };
-  const totalLength =
-    inputs[1] !== undefined &&
-    _.reduce(
-      _.slice(
-        _.map(inputs, (input) => input.length),
-        0,
-        inputs.length
-      ),
-      (sum, n) => sum + n
-    );
+  const totalLength = getTotalLength(inputs);
+  const backgroundColor = level % 2 !== 0 ? "white" : "ecececf1";
+
   return (
-    <div className="form">
-      <p>Characters in Children = {(inputs[0] && totalLength) || 0}</p>
+    <div className="form" style={{ background: backgroundColor }}>
+      <p>Characters in Children = {inputs[level] && totalLength || 0}</p>
       <input
         id="input"
         type="text"
-        value={inputs[0]}
+        value={inputs[level]}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-          handleInputChange(event, 0)
+          handleInputChange(event, level)
         }
       />
       <div>
-        <Button label="Add Children" type="add" onClick={() => handleAdd(0)} />
+        <Button label="Add Child" type="add" onClick={() => handleAdd(0)} />
       </div>
       {inputs[1] !== undefined && (
         <ChildForm

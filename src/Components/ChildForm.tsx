@@ -1,6 +1,7 @@
 import Button from "./Button";
 import "./Form.css";
 import _ from "lodash";
+import { getTotalLength } from "./utills";
 
 type ChildProps = {
   level: number;
@@ -16,19 +17,14 @@ type ChildProps = {
 export default function ChildForm(props: ChildProps) {
   const { level, inputs, onAddChildren, onDeleteChildren, onInputChange } =
     props;
-  const totalLength: any =
-    inputs[level + 1] !== undefined &&
-    _.reduce(
-      _.slice(
-        _.map(inputs, (input) => input.length),
-        level,
-        inputs.length
-      ),
-      (sum, n) => sum + n
-    );
+
+  const totalLength = getTotalLength(inputs, level);
+
+  const backgroundColor = level % 2 !== 0 ? "white" : "ecececf1";
+
   return (
-    <div className="form">
-      <p>Characters in Children = {(inputs[level + 1] && totalLength) || 0}</p>
+    <div className="form" style={{ background: backgroundColor }}>
+      <p>Characters in Children = {(inputs[level] && totalLength) || 0}</p>
       <input
         id="input"
         type="text"
